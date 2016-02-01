@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>mediSell</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" type="text/css">
+
+    <!-- Custom Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../static/font-awesome/css/font-awesome.min.css" type="text/css">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="../static/css/animate.min.css" type="text/css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../static/css/creative.css" type="text/css">
+
+    <link href="../static/css/bootstrap-suggest.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top">
+
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">mediSell</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="#input">Input</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#results">Results</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+		<h1><i class="fa fa-user-md"></i> mediSell <br></h1>
+		<h2>A tool for improving pharmaceutical sales</h2>
+                <hr>
+                <p>mediSell assists pharmacetical sales representatives in targeting their sales and marketing by city and medical professional specialty in the state of California	</p>
+                <a href="#input" class="btn btn-primary btn-xl page-scroll">Try it out</a>
+            </div>
+        </div>
+    </header>
+
+<section class="bg-primary" id="input">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h2 class="section-heading">Please enter the city and specialty you'd like to target.</h2>
+                <hr class="light">
+                <p class="text-faded">To find the most commonly prescribed pharmaceutical classes in your area just enter the city and specialty you'd like to target.</p>
+    <form role="form">
+	  <div class="form-group">
+	    <label for="inputcity">City Name:</label>
+	    <input class="form-control" id="inputcity" type="text" methods='POST'>
+	  </div>
+	</form>
+</div>
+</div>
+<br>
+<br>
+<div class="col-lg-4 col-lg-offset-4 text-center">
+<div class="select">
+    <label for="specialtyselect">Specialty:</label>
+    <select class="form-control methods='POST'">
+        <option value="one">Family Practice</option>
+        <option value="two">General Practice</option>
+        <option value="three">Internal Medicine</option>
+        <option value="four">Nurse Practitioner</option>
+        <option value="four">Physician's Assistant</option>
+        <option value="five">Psychiatrist</option>
+    </select>
+</div>
+    <br><br>
+    <a href="#results" id="submitbutton" methods='POST' class="btn btn-primary btn-lg page-scroll">Submit</a>
+</div>
+</div>
+</section>
+
+    <section id="results">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Results</h2>
+                    <hr class="primary">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-stethoscope wow bounceIn text-primary"></i>
+                        <h4>Top 5 Targeted Pharmaceutical Prescriptions</h4>
+                        {% block page_content %}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Drug Class</th>
+                                    <th>Normalized Predicted Prescriptions (0-1)</th>
+                                <tr>
+                            </thead>
+                            <tbody>
+                                {% for class in classes %}
+                                <tr>
+                                    <td>{{ class.pharmclass }}</td>
+                                    <td>{{ class.scaledbatch }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% endblock %}
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class=bg-primary>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Contact Information</h2>
+                    <hr class="primary">
+                    <p>If you would like to contact me please use the information below.</p>
+                </div>
+	 	<div class="col-lg-8 col-lg-offset-2 text-center">
+                    <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
+                    <p><br><a href="mailto:denton.deloss@gmail.com">denton.deloss@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- jQuery -->
+    <script src="../static/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../static/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="../static/js/jquery.easing.min.js"></script>
+    <script src="../static/js/jquery.fittext.js"></script>
+    <script src="../static/js/wow.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../static/js/creative.js"></script>
+
+
+</body>
+
+</html>

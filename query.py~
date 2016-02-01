@@ -1,0 +1,44 @@
+from sqlalchemy import create_engine
+import psycopg2
+import matplotlib.pyplot as plt
+
+def query_results(city,specialty):
+    """
+    Given a city and specialty, returns a sorted
+    list of the top 10 pharmaceutical classes.
+    """
+    dbname = 'medicareData'
+    username = 'postgres'
+    mypassword = 'postgres123'
+
+    status = 1
+    engine = create_engine('postgres://%s:%s@localhost/%s'%(username,mypassword,dbname))
+    con = psycopg2.connect(database = dbname, user = username, password=mypassword)
+    cur = con.cursor()
+    drug_query = """
+    SELECT
+        fullDataBatchSummed.phamrclass,
+        fullDataBatchSummed.scaledbatch
+    FROM
+        fullDataBatchSummed
+    WHERE
+        fullDataBatchSummed.city == %s and fullDataBatchSummed.specialty == %s
+    ORDER BY
+        fullDataBatchSummed.scaledbatch desc
+    limit 10;
+    """
+    cur.execute(drug_query)
+    results = []
+    results = cur.fetchall()
+
+    #Construct our pharmclass data
+    class_list = []
+    for result in results:
+        results_dict = {}
+        class_dict = {}
+        class_dict['pharmclass'] = str(result[0]).encode('utf-8')
+        class_dict['scaledbatch'] = str(result[1]).encode('utf-8')
+        class_list.append(class_dict)
+    results_dict['class_list'] = class_list
+    cur.close()
+    return results_dict
