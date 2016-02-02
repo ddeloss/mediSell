@@ -92,7 +92,7 @@
     <form role="form">
 	  <div class="form-group">
 	    <label for="inputcity">City Name:</label>
-	    <input class="form-control" id="inputcity" type="text" methods='POST'>
+	    <input class="form-control" id="inputcity" type="text">
 	  </div>
 	</form>
 </div>
@@ -102,17 +102,17 @@
 <div class="col-lg-4 col-lg-offset-4 text-center">
 <div class="select">
     <label for="specialtyselect">Specialty:</label>
-    <select class="form-control methods='POST'">
-        <option value="one">Family Practice</option>
-        <option value="two">General Practice</option>
-        <option value="three">Internal Medicine</option>
-        <option value="four">Nurse Practitioner</option>
-        <option value="four">Physician's Assistant</option>
-        <option value="five">Psychiatrist</option>
+    <select class="form-control" id="specialtyselect">
+        <option value="Cardiology">Cardiology</option>
+        <option value="Family Practice">Family Practice</option>
+        <option value="Internal Medicine">Internal Medicine</option>
+        <option value="Nurse Practitioner">Nurse Practitioner</option>
+        <option value="Physician Assistant">Physician Assistant</option>
     </select>
 </div>
     <br><br>
-    <a href="#results" id="submitbutton" methods='POST' class="btn btn-primary btn-lg page-scroll">Submit</a>
+    <a href="#results" id="submitbutton" class="btn btn-primary btn-lg page-scroll">Submit</a>
+
 </div>
 </div>
 </section>
@@ -129,31 +129,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-6 text-center">
-                    <div class="service-box">
-                        <i class="fa fa-4x fa-stethoscope wow bounceIn text-primary"></i>
-                        <h4>Top 5 Targeted Pharmaceutical Prescriptions</h4>
-                        {% block page_content %}
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Drug Class</th>
-                                    <th>Normalized Predicted Prescriptions (0-1)</th>
-                                <tr>
-                            </thead>
-                            <tbody>
-                                {% for class in classes %}
-                                <tr>
-                                    <td>{{ class.pharmclass }}</td>
-                                    <td>{{ class.scaledbatch }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                        {% endblock %}
-                    </div>
+                <div id="tablediv">
                 </div>
                 </div>
-            </div>
+                </div>
         </div>
     </section>
 
@@ -187,6 +166,15 @@
     <!-- Custom Theme JavaScript -->
     <script src="../static/js/creative.js"></script>
 
+    <script>
+    $("#submitbutton").click(
+        function() {
+            var city = $("#inputcity").val();
+            var specialty = $("#specialtyselect").val();
+            $("#tablediv").load("/createtable",{"city": city,"specialty":specialty})
+        }
+    )
+    </script>
 
 </body>
 

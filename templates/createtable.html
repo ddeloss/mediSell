@@ -1,0 +1,19 @@
+<i class="fa fa-4x fa-stethoscope wow bounceIn text-primary"></i>
+<h4>Top 8 Targeted Pharmaceutical Classes</h4>
+<table class="table" width: 80%>
+    <thead>
+        <tr>
+            <th>Drug Class</th>
+            <th>Normalized Predicted Classes (0-1)</th>
+        <tr>
+    </thead>
+    <tbody>
+        {% for drugclass in drugclasses %}
+        <tr>
+            <td> {{ drugclass['pharmclass'] }} </td>
+            <td> {{ drugclass['scaledbatch'] }} </td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>

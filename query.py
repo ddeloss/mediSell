@@ -1,33 +1,32 @@
+import sqlalchemy
 from sqlalchemy import create_engine
 import psycopg2
-import matplotlib.pyplot as plt
+import pandas as pd
 
 def query_results(city,specialty):
     """
     Given a city and specialty, returns a sorted
     list of the top 10 pharmaceutical classes.
     """
-    dbname = 'medicareData'
-    username = 'postgres'
-    mypassword = 'postgres123'
+    dbname = 'medicare_data'; username = 'postgres'; mypassword = 'postgres123'; myhost='localhost';
 
 #Grab the data from our database
-    engine = create_engine('postgres://%s:%s@localhost/%s'%(username,mypassword,dbname))
-    con = psycopg2.connect(database = dbname, user = username, password=mypassword)
+    engine = create_engine('postgres://%s:%s@%s/%s'%(username,mypassword,myhost,dbname))
+    con = psycopg2.connect(database = dbname, host=myhost, user = username, password=mypassword)
     cur = con.cursor()
     drug_query = """
     SELECT
-        fullDataBatchSummed.phamrclass,
-        fullDataBatchSummed.scaledbatch
+        fulldatabatchsummed.pharmclass,
+        fulldatabatchsummed.scaledbatch
     FROM
-        fullDataBatchSummed
+        fulldatabatchsummed
     WHERE
-        fullDataBatchSummed.city == %s and fullDataBatchSummed.specialty == %s
+        fulldatabatchsummed.city = %s and fulldatabatchsummed.specialty = %s
     ORDER BY
-        fullDataBatchSummed.scaledbatch desc
-    limit 10;
+        fulldatabatchsummed.scaledbatch desc
+    limit 8;
     """
-    cur.execute(drug_query)
+    cur.execute(drug_query,(city,specialty))
     results = []
     results = cur.fetchall()
 
