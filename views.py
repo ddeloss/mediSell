@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request
-from mediSell import app
+from medisell import app
 from query import query_results
-from flask_wtf import Form
 from sqlalchemy import create_engine
 from sqlalchemy_utils import database_exists, create_database
 import pandas as pd

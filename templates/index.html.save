@@ -1,3 +1,4 @@
+ec2-52-8-13-76.us-west-1.compute.amazonaws.com
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,6 +58,7 @@
                     <li>
                         <a class="page-scroll" href="#input">Input</a>
                     </li>
+ec2-52-8-13-76.us-west-1.compute.amazonaws.com
                     <li>
                         <a class="page-scroll" href="#results">Results</a>
                     </li>
@@ -91,7 +93,7 @@
             <div class="col-lg-8 col-lg-offset-2 text-center">
                 <h2 class="section-heading">Please enter the city and specialty you'd like to target.</h2>
                 <hr class="light">
-                <p class="text-faded">To find the top 10 most commonly prescribed pharmaceutical classes in your area just enter the city and specialty you'd like to target.</p>
+                <p class="text-faded">To find the most commonly prescribed pharmaceutical classes in your area just enter the city and specialty you'd like to target.</p>
     <form role="form">
 	  <div class="form-group">
 	    <label for="inputcity">City Name:</label>
@@ -143,7 +145,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading"><br><br><br><br><br><br>Contact Information</h2>
+                    <h2 class="section-heading">Contact Information</h2>
                     <hr class="primary">
                     <p>If you would like to contact me please use the information below.</p>
                 </div>

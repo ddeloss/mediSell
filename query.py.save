@@ -24,7 +24,7 @@ def query_results(city,specialty):
         fulldatabatchsummed.city = %s and fulldatabatchsummed.specialty = %s
     ORDER BY
         fulldatabatchsummed.scaledbatch desc
-    limit 10;
+    limit 8;
     """
     cur.execute(drug_query,(city,specialty))
     results = []
@@ -36,7 +36,7 @@ def query_results(city,specialty):
         results_dict = {}
         class_dict = {}
         class_dict['pharmclass'] = str(result[0]).encode('utf-8')
-        class_dict['scaledbatch'] = str(round(result[1]*100,3)).encode('utf-8')
+        class_dict['scaledbatch'] = str(*100,3).encode('utf-8')
         class_list.append(class_dict)
     results_dict['class_list'] = class_list
     cur.close()
